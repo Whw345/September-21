@@ -1714,3 +1714,104 @@ h1 {
     margin-bottom: 75%;
   }
 }
+
+.mensaje-flores {
+  position: absolute;
+  top: clamp(9%, 13vh, 17%);
+  left: 50%;
+  width: max-content;
+  max-width: 90%;
+  transform: translateX(-50%);
+  z-index: 100;
+  text-align: center;
+  color: #d99b00;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+  border-right: 3px solid #d99b00;
+  animation:
+    escribir 4s steps(25, end) forwards,
+    cursor 0.7s step-end infinite;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes escribir {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mensaje-flores {
+    animation: none;
+    clip-path: none;
+    border-right: none;
+  }
+}
+
+.rat {
+  position: absolute;
+  bottom: 25vmin;
+  width: clamp(140px, 24vw, 280px);
+  height: auto;
+  z-index: 150;
+  pointer-events: none;
+  opacity: 0;
+  animation: rat-appear 1.2s ease-out 4s forwards;
+}
+
+.rat--left {
+  left: 12vw;
+}
+
+.rat--right {
+  right: 12vw;
+  transform: scaleX(-1);
+  animation-name: rat-appear-right;
+}
+
+@media only screen and (max-width: 600px) {
+  .rat {
+    bottom: 25vmin;
+    width: 145px;
+  }
+
+  .rat--left {
+    left: 5vw;
+  }
+
+  .rat--right {
+    right: 5vw;
+  }
+}
+
+@keyframes rat-appear {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rat-appear-right {
+  from {
+    opacity: 0;
+    transform: scaleX(-1) translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(-1) translateX(0);
+  }
+}
