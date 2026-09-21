@@ -1,6 +1,36 @@
 // Sincronizar las letras con la canción
-var audio = document.querySelector("audio");
+var audio = document.getElementById("bg-music");
 var lyrics = document.querySelector("#lyrics");
+var volumeControl = document.getElementById("volume-control");
+
+function tryPlayAudio() {
+  if (!audio) return;
+
+  audio.volume = Number(volumeControl ? volumeControl.value : 0.6);
+  audio.muted = false;
+  audio.play().catch(function () {
+    // El navegador bloquea autoplay; se reintenta cuando el usuario interactúa.
+  });
+}
+
+if (audio) {
+  audio.preload = "auto";
+  audio.loop = true;
+  audio.volume = Number(volumeControl ? volumeControl.value : 0.6);
+  window.addEventListener("load", function () {
+    tryPlayAudio();
+  });
+  audio.addEventListener("canplay", tryPlayAudio);
+  document.addEventListener("click", tryPlayAudio, { once: true });
+  document.addEventListener("touchstart", tryPlayAudio, { once: true });
+  document.addEventListener("keydown", tryPlayAudio, { once: true });
+}
+
+if (volumeControl && audio) {
+  volumeControl.addEventListener("input", function (event) {
+    audio.volume = Number(event.target.value);
+  });
+}
 
 // Array de objetos que contiene cada línea y su tiempo de aparición en segundos
 var lyricsData = [
@@ -35,6 +65,8 @@ var lyricsData = [
 
 // Animar las letras
 function updateLyrics() {
+  if (!audio || !lyrics) return;
+
   var time = Math.floor(audio.currentTime);
   var currentLine = lyricsData.find(
     (line) => time >= line.time && time < line.time + 6
