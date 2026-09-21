@@ -12,7 +12,11 @@ body {
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
-  background: url("../img/yellow-bg.jpg") center center / cover no-repeat;
+  min-height: 100dvh;
+  background-image: url("../img/yellow-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow: hidden;
   perspective: 1000px;
 }
@@ -21,18 +25,24 @@ body {
   font-size: 28px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: white;
-  position: absolute;
-  margin-bottom: 20%;
-  z-index: 1;
+  position: fixed;
+  left: 50%;
+  bottom: clamp(32px, 13vh, 150px);
+  width: min(90vw, 760px);
+  transform: translateX(-50%);
+  z-index: 220;
   font-weight: bold;
   letter-spacing: 4px;
+  line-height: 1.25;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
 }
 @media only screen and (max-width: 600px) {
-  /* Estilos específicos para dispositivos con un ancho máximo de 600px */
   #lyrics {
-      font-size: 14px; /* Reduce el tamaño del texto para dispositivos más pequeños */
-      margin-bottom: 530px;
-      letter-spacing: 3px;
+      font-size: clamp(14px, 4vw, 20px);
+      bottom: clamp(28px, 11vh, 90px);
+      width: calc(100vw - 32px);
+      letter-spacing: 2px;
   }
 
 }
@@ -1692,10 +1702,6 @@ h1 {
 }
 
 /* Texto encima de las flores */
-#lyrics {
-  margin-bottom: 55%;
-}
-
 .titulo {
   margin-bottom: 65%;
 }
@@ -1704,10 +1710,6 @@ h1 {
   .flowers {
     transform: scale(0.55);
     transform-origin: bottom center;
-  }
-
-  #lyrics {
-    margin-bottom: 70%;
   }
 
   .titulo {
@@ -1813,5 +1815,67 @@ h1 {
   to {
     opacity: 1;
     transform: scaleX(-1) translateX(0);
+  }
+}
+
+.audio-controls {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 24px);
+  padding: 8px 14px;
+  color: #fff;
+  background: rgba(31, 27, 46, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.audio-controls label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.audio-controls input {
+  width: min(110px, 28vw);
+  accent-color: #f8d66d;
+}
+
+@media (max-width: 600px) {
+  body {
+    min-height: 100svh;
+    min-height: 100dvh;
+    background-position: center top;
+  }
+
+  .mensaje-flores {
+    top: 13vh;
+    width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
+    font-size: clamp(1.25rem, 7vw, 2rem);
+    white-space: normal;
+  }
+
+  .rat {
+    width: clamp(96px, 30vw, 145px);
+    bottom: 20vmin;
+  }
+
+  .rat--left {
+    left: 1vw;
+  }
+
+  .rat--right {
+    right: 1vw;
+  }
+
+  .audio-controls {
+    gap: 6px;
+    padding: 6px 10px;
   }
 }
