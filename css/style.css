@@ -12,6 +12,7 @@ body {
     background: url("../img/yellow-bg.jpg") center center / cover no-repeat;
     font-family: "Pixelify Sans", sans-serif;
     overflow: hidden;
+    padding: 1rem;
 }
 
 /* Envelope Screen */
@@ -33,19 +34,24 @@ body {
 }
 
 #envelope{
-    width: 200px;
+    display: block;
+    width: min(70vw, 200px);
+    height: auto;
+    margin: 0 auto;
     animation: pulse 1.5s infinite;
     cursor: pointer;
 }
 
 
 h1 {
-    font-size: 30px;
+    font-size: clamp(1.5rem, 7vw, 30px);
     margin:0;
 }
 
 p {
-    font-size: 40px;
+    font-size: clamp(1.5rem, 8vw, 40px);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
 .envelope-cat {
